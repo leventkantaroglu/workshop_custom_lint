@@ -10,7 +10,7 @@ void main(List<String> args, SendPort sendPort) {
   startPlugin(sendPort, _ExampleLinter());
 }
 
-bool _isShortTopLevelVariableNameLength(String name) {
+bool isShortTopLevelVariableNameLength(String name) {
   return name.length < _minTopLevelVariableNameLength;
 }
 
@@ -23,7 +23,7 @@ class _ExampleLinter extends PluginBase {
         library.topLevelElements.whereType<VariableElement>().toList();
 
     for (final currentVariable in topLevelVariables) {
-      if (_isShortTopLevelVariableNameLength(currentVariable.name)) {
+      if (isShortTopLevelVariableNameLength(currentVariable.name)) {
         yield Lint(
           code: 'top_level_variables_name_longer_than_one_char',
           message: 'Top level variable names should contain at least two chars',
